@@ -26,7 +26,6 @@ public class LayerProductionApplicationService implements ILayerProductionApplic
 		this.factoryDomainService = factoryDomainService;
 	}
 
-
 	public FactoryInfo openFactory(String factoryName) {
 		FactoryName name = new FactoryName(factoryName);
 
@@ -38,6 +37,7 @@ public class LayerProductionApplicationService implements ILayerProductionApplic
 	}
 
 	public List<LayerInfo> produceLayers(String factoryName, int numberOfLayers) {
+
 		LayerQuantity quanity = new LayerQuantity(numberOfLayers);
 
 		List<Layer> producedLayers = this.layerDomainService.produceLayers(quanity);

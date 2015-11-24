@@ -15,14 +15,24 @@ public class LayerProductionPresenter {
 
 	private ILayerProductionApplicationService layerProductionApplicationService;
 
+	public ICallback handleProduceLayerClicked;
+
+	public ICallback handleOpenFactoryClicked;
+
+	Random rand;
+	
 	public LayerProductionPresenter(LayerProductionView view,
 			ILayerProductionApplicationService layerProductionApplicationService) {
 		this.layerProductionApplicationService = layerProductionApplicationService;
 		this.view = view;
+		
 	}
 
 	public void initialize() {
 		Logger.log("Initializing presenter");
+		
+		this.rand = new Random();
+		
 		handleOpenFactoryClicked = new ICallback() {
 
 			public void call() {
@@ -37,21 +47,18 @@ public class LayerProductionPresenter {
 		};
 	}
 
-	public ICallback handleProduceLayerClicked;
-	public ICallback handleOpenFactoryClicked;
-	Random rand = new Random();
 
 	private void handleProduceLayerClicked() {
 		Logger.log("Handling Produce Layer Clicked Event");
 
-		List<LayerInfo> layers = this.layerProductionApplicationService.produceLayers("TestFactory", rand.nextInt(255));
+		List<LayerInfo> layers = this.layerProductionApplicationService.produceLayers("LayerFactory", rand.nextInt(255));
 		this.view.update(layers);
 	}
 
 	private void handleOpenFactoryClicked() {
 		Logger.log("Handling Open Factory Clicked Event");
 
-		FactoryInfo factoryInfo = this.layerProductionApplicationService.openFactory("TestFactory");
+		FactoryInfo factoryInfo = this.layerProductionApplicationService.openFactory("LAyerFactory");
 
 		Logger.log("Factory " + factoryInfo.getName() + " opened.");
 	}
